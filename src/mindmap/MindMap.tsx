@@ -33,8 +33,6 @@ function nodeCenters(board: HTMLElement) {
 
 const lerp = (a: Point, b: Point, t: number) => ({ x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t })
 
-// Nettleseren ville bare interpolert linjens rotasjon og bredde, og da glir endene
-// av boblene underveis. I stedet regnes linjen ut fra begge endepunktene i hvert steg.
 function animateEdges(before: Positions, after: Positions) {
   for (const [a, b] of links) {
     let previousAngle: number | undefined
@@ -91,7 +89,7 @@ export function MindMap() {
     const transition = withViewTransition(() => setState(next), ['mindmap'])
     if (!transition || prefersReducedMotion()) return
 
-    transition.ready.then(() => animateEdges(before, nodeCenters(board.current!))).catch(() => {})
+    transition.ready.then(() => animateEdges(before, nodeCenters(board.current!))).catch(() => { })
   }
 
   const focus = state?.focus ?? ROOT
