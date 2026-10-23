@@ -1,0 +1,50 @@
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.25rem 1rem;
+}
+
+.brand {
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+}
+
+.theme-toggle {
+  font: 0.85rem var(--mono);
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+}
+
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+footer {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  font: 0.8rem var(--mono);
+}
+
+footer a {
+  color: var(--muted);
+}
+
+.warning {
+  font: 0.85rem var(--mono);
+  color: var(--muted);
+}

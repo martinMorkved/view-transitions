@@ -1,0 +1,112 @@
+.mindmap {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.board {
+  position: relative;
+  height: clamp(440px, 72vh, 780px);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: var(--board);
+  background-image: radial-gradient(var(--dot) 1px, transparent 1.4px);
+  background-size: 22px 22px;
+}
+
+.edge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1.5px;
+  transform-origin: 0 0;
+  background: var(--line);
+  view-transition-class: edge;
+}
+
+.edge.is-active {
+  height: 2px;
+  background: var(--ink);
+}
+
+.node {
+  --size: 64px;
+  position: absolute;
+  width: calc(var(--size) * var(--scale));
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  display: grid;
+  place-items: center;
+  padding: 0.4rem;
+  border-radius: 50%;
+  border: 1.5px solid var(--line);
+  background: var(--board);
+  color: var(--muted);
+  font: 500 calc(11px * var(--scale)) / 1.15 var(--font);
+  text-align: center;
+  hyphens: manual;
+  cursor: pointer;
+  view-transition-class: node;
+}
+
+.node[data-depth='2'] {
+  --size: 80px;
+  font-size: calc(12px * var(--scale));
+}
+
+.node[data-depth='1'] {
+  --size: 104px;
+  border-color: var(--ink);
+  color: var(--ink);
+  font-size: calc(14px * var(--scale));
+}
+
+.node[data-depth='0'] {
+  --size: 150px;
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: calc(18px * var(--scale));
+  font-weight: 700;
+}
+
+.node:hover:not([data-depth='0']) {
+  border-color: var(--accent);
+  color: var(--ink);
+}
+
+.node:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.topic {
+  max-width: 52ch;
+}
+
+.topic h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+}
+
+.topic p {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* ---------- View transition ---------- */
+
+html:active-view-transition-type(mindmap)::view-transition-group(*) {
+  animation-duration: 700ms;
+  animation-timing-function: cubic-bezier(0.3, 1.2, 0.4, 1);
+}
+
+/* Linjene animeres fra JS, så bare det nye bildet trengs */
+::view-transition-old(*.edge) {
+  display: none;
+}
+::view-transition-new(*.edge) {
+  animation: none;
+  height: 100%;
+}

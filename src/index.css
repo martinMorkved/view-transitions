@@ -1,0 +1,56 @@
+:root {
+  --font: 'Space Grotesk', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+  --bg: #ebe8df;
+  --board: #f6f4ee;
+  --dot: #d3cfc3;
+  --ink: #1a1a18;
+  --muted: #6c6a62;
+  --line: #c4c0b4;
+  --accent: #ff5a1f;
+  --accent-ink: #1a1a18;
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --bg: #0e0e0d;
+  --board: #161614;
+  --dot: #2c2b27;
+  --ink: #eeeae0;
+  --muted: #97948a;
+  --line: #3d3c37;
+  --accent: #ff6a33;
+  --accent-ink: #0e0e0d;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+/* Temabytte: sirkelen animeres fra JS. Navngitte elementer ville ligget
+   over sirkelen, så de er med i root-bildet under denne overgangen. */
+html:active-view-transition-type(theme) * {
+  view-transition-name: none !important;
+}
+html:active-view-transition-type(theme)::view-transition-old(root),
+html:active-view-transition-type(theme)::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
